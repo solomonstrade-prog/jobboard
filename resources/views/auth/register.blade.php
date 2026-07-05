@@ -130,7 +130,6 @@
                                     </svg>
                                 </div>
                                 <select name="role" id="role" required class="block w-full pl-12 pr-10 py-3 bg-gray-50 border-gray-200 border rounded-xl focus:ring-2 focus:ring-[#a31b1b]/20 focus:border-[#a31b1b] transition-all outline-none text-gray-900 appearance-none sm:text-sm">
-                                    <option value="admin">Admin</option>
                                     <option value="employer">Employer</option>
                                     <option value="Job Seeker">Job Seeker</option>
                                 </select>

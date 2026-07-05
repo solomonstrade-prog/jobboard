@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => 'required|string|in:admin,employer,Job Seeker',
+            'role' => 'required|string|in:employer,Job Seeker',
         ]);
 
         $user = User::create([
@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         if($request->role ==='Job Seeker'){
-           
+
             return redirect()->route('jobseeker.profile.create');
         }
 
@@ -57,10 +57,6 @@ class RegisteredUserController extends Controller
             return redirect()->route('employer.profile.create');
         }
 
-        if($request->role ==='admin'){
-            return redirect()->route('admin.profile.create');
-        }
-
-        return redirect()->route('admin.dashboard');
+        return redirect('/');
     }
 }
