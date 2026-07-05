@@ -1,22 +1,14 @@
-<x-apps.app-jobseeker>
+<x-apps.app-public-jobs>
 
-    <x-slot name="header">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-1 px-4 gap-2">
-            <div class="ml-2">
-                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">
-                    Find <span class="text-[#a31b1b]">Jobs</span>
-                </h2>
-                <p class="text-gray-400 text-sm font-medium">Discover your next career opportunity</p>
+    <section class="bg-gray-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="mb-8">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
+                    Find your next <span class="text-[#a31b1b]">role</span>
+                </h1>
+                <p class="text-gray-500 mt-2 text-lg">Browse open positions from top companies — no account needed.</p>
             </div>
-        </div>
-    </x-slot>
 
-    <div class="py-10 bg-gray-50/50 min-h-screen">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
-
-            @include('incs.alert')
-
-            {{-- Search Section --}}
             <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-6 md:p-8">
                 <form action="{{ route('jobseeker.jobs.search') }}" method="GET" class="flex flex-col md:flex-row gap-4">
                     <div class="flex-grow relative">
@@ -41,6 +33,13 @@
                     </button>
                 </form>
             </div>
+        </div>
+    </section>
+
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+
+            @include('incs.alert')
 
             @if($jobs->isEmpty())
                 <div class="bg-white border border-red-100 bg-red-50/30 rounded-2xl p-8 text-center">
@@ -51,6 +50,19 @@
                     <p class="text-gray-500">Try adjusting your search filters to find more opportunities.</p>
                 </div>
             @else
+                <div class="flex justify-between items-center">
+                    <p class="text-gray-500 font-medium">
+                        Showing <span class="text-gray-900 font-bold">{{ $jobs->count() }}</span>
+                        {{ $jobs->count() === 1 ? 'job' : 'jobs' }} on this page
+                    </p>
+                    @guest
+                        <a href="{{ route('register') }}"
+                           class="text-sm font-bold text-[#a31b1b] hover:text-[#8a1717] no-underline flex items-center gap-1">
+                            <i class="bi bi-person-plus"></i> Create a free account to apply
+                        </a>
+                    @endguest
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     @foreach($jobs as $job)
                         @include('Jobseeker.partials.job-card', ['job' => $job])
@@ -63,5 +75,5 @@
             </div>
 
         </div>
-    </div>
-</x-apps.app-jobseeker>
+    </section>
+</x-apps.app-public-jobs>

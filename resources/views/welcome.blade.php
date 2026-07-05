@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('register') }}" class="nav-link-jb">Find Jobs</a>
+                    <a href="{{ route('jobseeker.jobs.index') }}" class="nav-link-jb">Find Jobs</a>
                     <a href="{{ route('register') }}" class="nav-link-jb">Browse Companies</a>
                     <a href="{{ route('register') }}" class="nav-link-jb">Salary Guide</a>
                 </div>
@@ -156,22 +156,22 @@
                         The ultimate destination for ambitious professionals and elite employers. Navigate your career with the most advanced job board platform.
                     </p>
 
-                    <!-- Mock Search Box -->
-                    <div class="search-box mb-12 flex flex-col sm:flex-row items-center gap-4">
+                    <!-- Hero Search Box -->
+                    <form action="{{ route('jobseeker.jobs.search') }}" method="GET" class="search-box mb-12 flex flex-col sm:flex-row items-center gap-4">
                         <div class="flex-grow flex items-center px-4 w-full">
                             <i class="bi bi-search text-gray-400 mr-3"></i>
-                            <input type="text" placeholder="Job title, keywords..." class="w-full py-3 border-none focus:ring-0 outline-none placeholder-gray-400 font-medium" />
+                            <input type="search" name="categorie" placeholder="Job title, keywords..." class="w-full py-3 border-none focus:ring-0 outline-none placeholder-gray-400 font-medium" />
                         </div>
                         <div class="hidden sm:block h-8 w-px bg-gray-200"></div>
                         <div class="flex-grow flex items-center px-4 w-full">
                             <i class="bi bi-geo-alt text-gray-400 mr-3"></i>
-                            <input type="text" placeholder="City or remote" class="w-full py-3 border-none focus:ring-0 outline-none placeholder-gray-400 font-medium" />
+                            <input type="search" name="location" placeholder="City or remote" class="w-full py-3 border-none focus:ring-0 outline-none placeholder-gray-400 font-medium" />
                         </div>
-                        <a href="{{ route('register') }}" class="btn-primary-jb w-full sm:w-auto flex items-center justify-center gap-2 no-underline">
+                        <button type="submit" class="btn-primary-jb w-full sm:w-auto flex items-center justify-center gap-2 no-underline border-0 cursor-pointer">
                             <span>Search</span>
                             <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
+                        </button>
+                    </form>
 
                     <div class="flex items-center justify-center lg:justify-start space-x-6 text-sm text-gray-500 font-medium">
                         <span class="flex items-center"><i class="bi bi-check-circle-fill text-green-500 mr-2"></i> 15k+ Real Jobs</span>

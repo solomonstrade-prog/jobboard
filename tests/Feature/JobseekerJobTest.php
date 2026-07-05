@@ -43,7 +43,15 @@ class JobseekerJobTest extends TestCase
         $this->get('/jobseeker/dashboard')->assertRedirect('/login');
     }
 
-    // ─── Browse & Search ──────────────────────────────────────────────────────
+    // ─── Browse & Search (public — no login required) ────────────────────────
+
+    /** @test */
+    public function test_guest_can_browse_available_jobs(): void
+    {
+        Job::factory()->count(3)->create();
+
+        $this->get('/jobseeker/jobs')->assertStatus(200);
+    }
 
     /** @test */
     public function test_jobseeker_can_browse_available_jobs(): void
@@ -52,6 +60,26 @@ class JobseekerJobTest extends TestCase
         $user = $this->makeJobseeker();
 
         $this->actingAs($user)->get('/jobseeker/jobs')->assertStatus(200);
+    }
+
+    /** @test */
+    public function test_guest_can_search_jobs_by_category(): void
+    {
+        Job::factory()->create(['categorie' => 'IT']);
+        Job::factory()->create(['categorie' => 'Design']);
+
+        $response = $this->get('/jobseeker/search?categorie=IT');
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function test_guest_can_search_jobs_by_location(): void
+    {
+        Job::factory()->create(['location' => 'Paris']);
+        Job::factory()->create(['location' => 'Lyon']);
+
+        $response = $this->get('/jobseeker/search?location=Paris');
+        $response->assertStatus(200);
     }
 
     /** @test */
@@ -74,6 +102,27 @@ class JobseekerJobTest extends TestCase
         $response = $this->actingAs($user)
             ->get('/jobseeker/search?location=Paris');
         $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function test_guest_save_request_redirects_to_login(): void
+    {
+        $job = Job::factory()->create();
+
+        // Guests posting to the save endpoint should be bounced to login,
+        // not get a 500 from a missing auth()->user() call.
+        $this->post("/jobs/{$job->id}/save")
+            ->assertRedirect('/login');
+    }
+
+    /** @test */
+    public function test_guest_apply_request_redirects_to_login(): void
+    {
+        $job = Job::factory()->create();
+
+        $this->post("/jobs/{$job->id}/apply", [
+            'cover_letter' => 'Interested in the role.',
+        ])->assertRedirect('/login');
     }
 
     // ─── Save / Unsave Jobs ───────────────────────────────────────────────────

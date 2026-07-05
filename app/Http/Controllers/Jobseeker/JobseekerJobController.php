@@ -24,7 +24,7 @@ class JobseekerJobController extends Controller
     public function index(){
         $jobs=Job::paginate(3);
 
-        return view('Jobseeker.jobs',compact("jobs"));
+        return $this->renderJobsView($jobs);
     }
 
 
@@ -127,7 +127,20 @@ class JobseekerJobController extends Controller
         $jobs = $query->paginate(10);
 
         // Return the view with the search results
-        return view('Jobseeker.jobs', compact('jobs'));
+        return $this->renderJobsView($jobs);
+    }
+
+    /**
+     * Pick the right jobs view based on whether the visitor is authenticated
+     * as a Job Seeker. Guests (and other roles) get the public layout; only
+     * logged-in job seekers get the sidebar dashboard layout.
+     */
+    private function renderJobsView($jobs)
+    {
+        $isJobseeker = auth()->check() && auth()->user()->role === 'Job Seeker';
+        $view = $isJobseeker ? 'Jobseeker.jobs' : 'Jobseeker.jobs-public';
+
+        return view($view, compact('jobs'));
     }
 
 

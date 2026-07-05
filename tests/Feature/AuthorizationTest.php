@@ -71,12 +71,21 @@ class AuthorizationTest extends TestCase
     }
 
     /** @test */
-    public function test_employer_cannot_access_jobseeker_jobs_page(): void
+    public function test_employer_can_browse_jobs_publicly(): void
     {
+        // /jobseeker/jobs is public: any visitor (guest, employer, admin) can
+        // view the listing. The view itself serves the public layout to anyone
+        // who is not logged in as a Job Seeker.
         $profil = ProfilEmployer::factory()->create();
         $user   = User::factory()->employer()->create(['profile_id' => $profil->id]);
 
-        $this->actingAs($user)->get('/jobseeker/jobs')->assertStatus(403);
+        $this->actingAs($user)->get('/jobseeker/jobs')->assertStatus(200);
+    }
+
+    /** @test */
+    public function test_guest_can_browse_jobs_publicly(): void
+    {
+        $this->get('/jobseeker/jobs')->assertStatus(200);
     }
 
     /** @test */

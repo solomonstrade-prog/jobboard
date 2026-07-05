@@ -97,16 +97,17 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
 
 
+    // Public job browsing — accessible without login.
+    // The view itself swaps in login CTAs for guests (see Jobseeker/jobs-public.blade.php).
+    Route::get('/jobseeker/jobs', [JobseekerJobController::class, 'index'])->name('jobseeker.jobs.index');
+    Route::get('/jobseeker/search', [JobseekerJobController::class, 'search'])->name('jobseeker.jobs.search');
+
     // Job Seeker Routes
     Route::middleware(['auth', 'role:Job Seeker'])->group(function () {
 
 
         // Dashboard for Job Seeker
         Route::get('/jobseeker/dashboard', [JobseekerJobController::class, 'dashboardJobseker'])->name('jobseeker.dashboard');
-
-        // View Available Jobs (Browse)
-        Route::get('/jobseeker/jobs', [JobseekerJobController::class, 'index'])->name('jobseeker.jobs.index');
-        Route::get('/jobseeker/search', [JobseekerJobController::class, 'search'])->name('jobseeker.jobs.search');
 
         // Applying and Saving Sobs
         Route::post('/jobs/{job}/apply', [JobseekerJobController::class, 'apply'])->name('jobs.apply');
