@@ -11,7 +11,11 @@ class EmployerApplicationController extends Controller
     
     public function index(){
 
-        $employerId = auth()->user()->profile->id; // ID de l'employeur connecté
+        $employerProfile = auth()->user()->profile;
+        if (!$employerProfile) {
+            return redirect()->route('employer.profile.create')->with('error', 'Please create your employer profile first.');
+        }
+        $employerId = $employerProfile->id; // ID de l'employeur connecté
 
         $applications =Application::whereHas('job',function ($query) use ($employerId){
             $query->where('id_employeur',$employerId); // Filtrer les emplois de cet employeur
@@ -50,11 +54,11 @@ class EmployerApplicationController extends Controller
 
 
     public function destroy($id){
-        $application = Application::find($id);
+        $application = Application::findOrFail($id);
 
         $application->delete();
 
-        return redirect()->route('employer.jobs.index')->with('success', 'Application deleted successfully.');
+        return redirect()->route('employer.applications.index')->with('success', 'Application deleted successfully.');
     }
     
 

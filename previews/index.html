@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JobBoard — Find your next role</title>
+<meta name="description" content="A modern job board connecting job seekers, employers, and admins. Browse jobs, post openings, and manage applications." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        colors: {
+          brand: {
+            50:  '#eef2ff',
+            100: '#e0e7ff',
+            500: '#6366f1',
+            600: '#4f46e5',
+            700: '#4338ca',
+            800: '#3730a3',
+          },
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .hero-grad {
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(99,102,241,0.18), transparent 60%),
+      radial-gradient(900px 500px at 90% 0%, rgba(16,185,129,0.18), transparent 60%),
+      linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  }
+  .card-hover { transition: transform .15s ease, box-shadow .15s ease; }
+  .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08); }
+</style>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+
+<!-- Header -->
+<header class="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-lg bg-brand-600 text-white grid place-items-center font-bold">JB</div>
+      <span class="font-bold text-slate-900 text-lg">JobBoard</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+      <a href="index.html" class="text-brand-700">Home</a>
+      <a href="jobs.html" class="hover:text-slate-900">Browse Jobs</a>
+      <a href="dashboard-employer.html" class="hover:text-slate-900">For Employers</a>
+      <a href="dashboard-jobseeker.html" class="hover:text-slate-900">For Job Seekers</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="login.html" class="text-sm font-medium text-slate-700 hover:text-slate-900">Sign in</a>
+      <a href="register.html" class="text-sm font-medium bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-700">Get started</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero-grad">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+    <div class="max-w-3xl">
+      <span class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 text-xs font-semibold px-3 py-1 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-600"></span>
+        2,400+ new jobs this week
+      </span>
+      <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
+        Find a job that <span class="text-brand-600">loves you back</span>.
+      </h1>
+      <p class="mt-5 text-lg text-slate-600 max-w-2xl">
+        JobBoard connects ambitious candidates with companies that invest in their people.
+        Browse curated roles, save your favorites, and apply in one click.
+      </p>
+
+      <!-- Search -->
+      <form class="mt-8 bg-white border border-slate-200 rounded-2xl shadow-sm p-2 flex flex-col sm:flex-row gap-2">
+        <div class="flex-1 flex items-center gap-2 px-3">
+          <svg class="w-5 h-5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-3.5-3.5"/></svg>
+          <input type="text" placeholder="Job title, keyword, or company" class="w-full py-3 text-sm focus:outline-none" />
+        </div>
+        <div class="flex-1 flex items-center gap-2 px-3 border-t sm:border-t-0 sm:border-l border-slate-200">
+          <svg class="w-5 h-5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <input type="text" placeholder="City, state, or remote" class="w-full py-3 text-sm focus:outline-none" />
+        </div>
+        <a href="jobs.html" class="bg-brand-600 text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-brand-700 text-center">Search jobs</a>
+      </form>
+
+      <div class="mt-5 flex flex-wrap items-center gap-3 text-xs text-slate-500">
+        <span class="font-medium text-slate-600">Popular:</span>
+        <span class="px-2.5 py-1 rounded-full bg-slate-100">Frontend</span>
+        <span class="px-2.5 py-1 rounded-full bg-slate-100">Data</span>
+        <span class="px-2.5 py-1 rounded-full bg-slate-100">Design</span>
+        <span class="px-2.5 py-1 rounded-full bg-slate-100">Remote</span>
+        <span class="px-2.5 py-1 rounded-full bg-slate-100">Marketing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats strip -->
+<section class="border-y border-slate-200 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div><div class="text-3xl font-bold text-slate-900">15k+</div><div class="text-sm text-slate-500 mt-1">Active jobs</div></div>
+    <div><div class="text-3xl font-bold text-slate-900">850+</div><div class="text-sm text-slate-500 mt-1">Companies hiring</div></div>
+    <div><div class="text-3xl font-bold text-slate-900">120k+</div><div class="text-sm text-slate-500 mt-1">Job seekers</div></div>
+    <div><div class="text-3xl font-bold text-slate-900">94%</div><div class="text-sm text-slate-500 mt-1">Match accuracy</div></div>
+  </div>
+</section>
+
+<!-- Featured jobs -->
+<section class="bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Featured opportunities</h2>
+        <p class="text-slate-500 mt-1">Hand-picked roles from top employers.</p>
+      </div>
+      <a href="jobs.html" class="text-sm font-semibold text-brand-700 hover:text-brand-800">View all jobs →</a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Card -->
+      <a href="job-detail.html" class="card-hover bg-white border border-slate-200 rounded-2xl p-6 block">
+        <div class="flex items-start justify-between">
+          <div class="w-11 h-11 rounded-lg bg-indigo-100 text-indigo-700 grid place-items-center font-bold">CN</div>
+          <span class="text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Remote</span>
+        </div>
+        <h3 class="mt-4 font-semibold text-slate-900">Senior Full-Stack Engineer</h3>
+        <p class="text-sm text-slate-500 mt-1">CloudNine Systems · Seattle, WA</p>
+        <p class="text-sm text-slate-600 mt-3 line-clamp-2">Design, build, and operate production services end-to-end. Own architecture decisions and mentor mid-level engineers.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="text-sm font-semibold text-slate-900">$125,000</span>
+          <span class="text-xs text-slate-500">Full-time · CDI</span>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="card-hover bg-white border border-slate-200 rounded-2xl p-6 block">
+        <div class="flex items-start justify-between">
+          <div class="w-11 h-11 rounded-lg bg-rose-100 text-rose-700 grid place-items-center font-bold">BM</div>
+          <span class="text-xs font-medium text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full">Full-time</span>
+        </div>
+        <h3 class="mt-4 font-semibold text-slate-900">Product Designer</h3>
+        <p class="text-sm text-slate-500 mt-1">BrightMedia Agency · New York, NY</p>
+        <p class="text-sm text-slate-600 mt-3 line-clamp-2">Lead end-to-end product design for a B2B SaaS suite. Figma expert with strong systems thinking.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="text-sm font-semibold text-slate-900">$102,000</span>
+          <span class="text-xs text-slate-500">Full-time · CDI</span>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="card-hover bg-white border border-slate-200 rounded-2xl p-6 block">
+        <div class="flex items-start justify-between">
+          <div class="w-11 h-11 rounded-lg bg-amber-100 text-amber-700 grid place-items-center font-bold">PF</div>
+          <span class="text-xs font-medium text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full">Full-time</span>
+        </div>
+        <h3 class="mt-4 font-semibold text-slate-900">Game Engine Programmer</h3>
+        <p class="text-sm text-slate-500 mt-1">PixelForge Games · Austin, TX</p>
+        <p class="text-sm text-slate-600 mt-3 line-clamp-2">Build and optimize core engine systems for a multiplayer title launching on PC and console.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="text-sm font-semibold text-slate-900">$115,000</span>
+          <span class="text-xs text-slate-500">Full-time · CDI</span>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="card-hover bg-white border border-slate-200 rounded-2xl p-6 block">
+        <div class="flex items-start justify-between">
+          <div class="w-11 h-11 rounded-lg bg-emerald-100 text-emerald-700 grid place-items-center font-bold">NB</div>
+          <span class="text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Hybrid</span>
+        </div>
+        <h3 class="mt-4 font-semibold text-slate-900">Financial Controller</h3>
+        <p class="text-sm text-slate-500 mt-1">NorthStar Bank · New York, NY</p>
+        <p class="text-sm text-slate-600 mt-3 line-clamp-2">Lead monthly close, audit, and FP&amp;A processes. CPA preferred with 8+ years of experience.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="text-sm font-semibold text-slate-900">$145,000</span>
+          <span class="text-xs text-slate-500">Full-time · CDI</span>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="card-hover bg-white border border-slate-200 rounded-2xl p-6 block">
+        <div class="flex items-start justify-between">
+          <div class="w-11 h-11 rounded-lg bg-sky-100 text-sky-700 grid place-items-center font-bold">MC</div>
+          <span class="text-xs font-medium text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full">Full-time</span>
+        </div>
+        <h3 class="mt-4 font-semibold text-slate-900">Clinical Data Analyst</h3>
+        <p class="text-sm text-slate-500 mt-1">MediCore Labs · Boston, MA</p>
+        <p class="text-sm text-slate-600 mt-3 line-clamp-2">Analyze clinical trial datasets and prepare regulatory reports for FDA submissions.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="text-sm font-semibold text-slate-900">$84,000</span>
+          <span class="text-xs text-slate-500">Full-time · CDI</span>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="card-hover bg-white border border-slate-200 rounded-2xl p-6 block">
+        <div class="flex items-start justify-between">
+          <div class="w-11 h-11 rounded-lg bg-fuchsia-100 text-fuchsia-700 grid place-items-center font-bold">AN</div>
+          <span class="text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Remote</span>
+        </div>
+        <h3 class="mt-4 font-semibold text-slate-900">Avionics Systems Engineer</h3>
+        <p class="text-sm text-slate-500 mt-1">AeroNova Aerospace · Huntsville, AL</p>
+        <p class="text-sm text-slate-600 mt-3 line-clamp-2">Design and validate embedded avionics for our next-generation satellite platform.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="text-sm font-semibold text-slate-900">$132,000</span>
+          <span class="text-xs text-slate-500">Full-time · CDI</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 text-center">How JobBoard works</h2>
+    <p class="text-slate-500 text-center mt-2">Three roles, one platform.</p>
+
+    <div class="mt-10 grid md:grid-cols-3 gap-6">
+      <div class="border border-slate-200 rounded-2xl p-6">
+        <div class="w-11 h-11 rounded-lg bg-brand-50 text-brand-700 grid place-items-center">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="mt-4 font-semibold text-slate-900">For Job Seekers</h3>
+        <p class="mt-2 text-sm text-slate-600">Build a profile, browse openings, save favorites, and track every application from one dashboard.</p>
+        <a href="dashboard-jobseeker.html" class="mt-4 inline-block text-sm font-semibold text-brand-700 hover:text-brand-800">See jobseeker dashboard →</a>
+      </div>
+      <div class="border border-slate-200 rounded-2xl p-6">
+        <div class="w-11 h-11 rounded-lg bg-brand-50 text-brand-700 grid place-items-center">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3 class="mt-4 font-semibold text-slate-900">For Employers</h3>
+        <p class="mt-2 text-sm text-slate-600">Post openings, review applicants, and update application status — all from a focused employer workspace.</p>
+        <a href="dashboard-employer.html" class="mt-4 inline-block text-sm font-semibold text-brand-700 hover:text-brand-800">See employer dashboard →</a>
+      </div>
+      <div class="border border-slate-200 rounded-2xl p-6">
+        <div class="w-11 h-11 rounded-lg bg-brand-50 text-brand-700 grid place-items-center">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+        </div>
+        <h3 class="mt-4 font-semibold text-slate-900">For Admins</h3>
+        <p class="mt-2 text-sm text-slate-600">Monitor users, jobs, and applications across the platform with month-over-month trend charts.</p>
+        <a href="dashboard-admin.html" class="mt-4 inline-block text-sm font-semibold text-brand-700 hover:text-brand-800">See admin dashboard →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Preview pages hub -->
+<section class="bg-slate-900 text-slate-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white">Preview pages</h2>
+        <p class="text-slate-400 mt-1">Clickable static mockups of every key screen in the product.</p>
+      </div>
+      <span class="text-xs uppercase tracking-wider text-slate-400">Demo · No backend</span>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <a href="index.html" class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-2xl p-5 transition">
+        <div class="text-xs font-semibold text-brand-400 uppercase">Marketing</div>
+        <div class="mt-1 font-semibold text-white">Landing page</div>
+        <div class="text-sm text-slate-400 mt-1">Hero, search, featured jobs, value props.</div>
+      </a>
+      <a href="jobs.html" class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-2xl p-5 transition">
+        <div class="text-xs font-semibold text-brand-400 uppercase">Discovery</div>
+        <div class="mt-1 font-semibold text-white">Browse jobs</div>
+        <div class="text-sm text-slate-400 mt-1">List view with category, location, type filters.</div>
+      </a>
+      <a href="job-detail.html" class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-2xl p-5 transition">
+        <div class="text-xs font-semibold text-brand-400 uppercase">Detail</div>
+        <div class="mt-1 font-semibold text-white">Job detail</div>
+        <div class="text-sm text-slate-400 mt-1">Full description, company, apply CTA.</div>
+      </a>
+      <a href="login.html" class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-2xl p-5 transition">
+        <div class="text-xs font-semibold text-brand-400 uppercase">Auth</div>
+        <div class="mt-1 font-semibold text-white">Sign in</div>
+        <div class="text-sm text-slate-400 mt-1">Role-aware login form.</div>
+      </a>
+      <a href="register.html" class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-2xl p-5 transition">
+        <div class="text-xs font-semibold text-brand-400 uppercase">Auth</div>
+        <div class="mt-1 font-semibold text-white">Register</div>
+        <div class="text-sm text-slate-400 mt-1">Onboarding with role selection.</div>
+      </a>
+      <a href="dashboard-jobseeker.html" class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-2xl p-5 transition">
+        <div class="text-xs font-semibold text-emerald-400 uppercase">Dashboard</div>
+        <div class="mt-1 font-semibold text-white">Jobseeker</div>
+        <div class="text-sm text-slate-400 mt-1">Saved jobs, applications, recommendations.</div>
+      </a>
+      <a href="dashboard-employer.html" class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-2xl p-5 transition">
+        <div class="text-xs font-semibold text-emerald-400 uppercase">Dashboard</div>
+        <div class="mt-1 font-semibold text-white">Employer</div>
+        <div class="text-sm text-slate-400 mt-1">Job posts, applicants, status updates.</div>
+      </a>
+      <a href="dashboard-admin.html" class="block bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-2xl p-5 transition">
+        <div class="text-xs font-semibold text-emerald-400 uppercase">Dashboard</div>
+        <div class="mt-1 font-semibold text-white">Admin</div>
+        <div class="text-sm text-slate-400 mt-1">Platform metrics and trend charts.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-white border-t border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
+    <div>
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-brand-600 text-white grid place-items-center font-bold text-sm">JB</div>
+        <span class="font-bold text-slate-900">JobBoard</span>
+      </div>
+      <p class="mt-3 text-slate-500">A demo project preview. Static HTML mockups — no backend, no data persistence.</p>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900">Product</div>
+      <ul class="mt-3 space-y-2 text-slate-600">
+        <li><a href="jobs.html" class="hover:text-slate-900">Browse jobs</a></li>
+        <li><a href="dashboard-employer.html" class="hover:text-slate-900">For employers</a></li>
+        <li><a href="dashboard-jobseeker.html" class="hover:text-slate-900">For job seekers</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900">Account</div>
+      <ul class="mt-3 space-y-2 text-slate-600">
+        <li><a href="login.html" class="hover:text-slate-900">Sign in</a></li>
+        <li><a href="register.html" class="hover:text-slate-900">Create account</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-semibold text-slate-900">Demo</div>
+      <ul class="mt-3 space-y-2 text-slate-600">
+        <li><a href="dashboard-admin.html" class="hover:text-slate-900">Admin console</a></li>
+        <li><a href="job-detail.html" class="hover:text-slate-900">Sample job post</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-xs text-slate-500 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+      <span>© 2026 JobBoard demo. Built with Laravel · Tailwind CSS.</span>
+      <span>Static preview · v1.0</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

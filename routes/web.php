@@ -17,9 +17,6 @@ use App\Http\Controllers\Jobseeker\ProfileJobseekerController;
 use App\Http\Controllers\Jobseeker\SavedJobsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestEmailController;
-use App\Models\ProfileAdmin;
-use App\Models\ProfilJobseeker;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,15 +39,6 @@ Route::get('/tt',function () {
 })->middleware(['auth','role:Job Seeker']);
 
 
-// Public routes (no middleware)
-/* Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
- */
-// Logout route
-/* Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
- */
-
-
 // Admin Routes
 Route::middleware(['auth','role:admin'])->group(function () {
     // Dashboard for Admin
@@ -60,16 +48,12 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::get('/create', [AdminProfileController::class, 'create'])->name('admin.profile.create');
         Route::post('/', [AdminProfileController::class, 'store'])->name('admin.profile.store');
     });
-        
-    
+
+
 
     // Job Management for Admin
     Route::prefix('jobs')->group(function () {
         Route::get('/', [AdminJobController::class, 'index'])->name('jobs.index');
-       /*  Route::get('/create', [AdminJobController::class, 'create'])->name('jobs.create');
-        Route::post('/', [AdminJobController::class, 'store'])->name('jobs.store');
-        Route::get('/{id}/edit', [AdminJobController::class, 'edit'])->name('jobs.edit');
-        Route::put('/{id}', [AdminJobController::class, 'update'])->name('jobs.update'); */
         Route::delete('/{id}', [AdminJobController::class, 'destroy'])->name('jobs.destroy');
         Route::get('/search', [AdminJobController::class, 'search'])->name('jobs.search');
     });
@@ -78,10 +62,6 @@ Route::middleware(['auth','role:admin'])->group(function () {
     // Job Seeker Management
     Route::prefix('jobseekers')->group(function () {
         Route::get('/', [AdminProfilJobseekerController::class, 'index'])->name('jobseeker.index');
-       /*  Route::get('/create', [AdminProfilJobseekerController::class, 'create'])->name('jobseeker.create');
-        Route::post('/', [AdminProfilJobseekerController::class, 'store'])->name('jobseeker.store');
-        Route::get('/{id}/edit', [AdminProfilJobseekerController::class, 'edit'])->name('jobseeker.edit');
-        Route::put('/{id}', [AdminProfilJobseekerController::class, 'update'])->name('jobseeker.update'); */
         Route::delete('/{id}', [AdminProfilJobseekerController::class, 'destroy'])->name('jobseeker.destroy');
         Route::get('/search', [AdminProfilJobseekerController::class, 'search'])->name('jobseeker.search');
     });
@@ -111,14 +91,14 @@ Route::middleware(['auth','role:admin'])->group(function () {
     //logout Employer dashboard
     Route::get('/admin/logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
 
-    
+
 });
 
 
 
 
     // Job Seeker Routes
-    Route::middleware(['auth', 'role:Job Seeker'])->group(function () {  
+    Route::middleware(['auth', 'role:Job Seeker'])->group(function () {
 
 
         // Dashboard for Job Seeker
@@ -153,12 +133,10 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::put('/profilejobseeker/update', [ProfileJobseekerController::class, 'update'])->name('profile.update');
 
         // Logout Jobseeker Route
-        Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+        Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('jobseeker.logout');
 
-        
+
     });
-
-
 
 
 
@@ -191,253 +169,19 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
         // Employer Profile Management
         Route::get('/profileEmployer/create', [ProfilEmployerController::class, 'create'])->name('employer.profile.create');
-        Route::post('/profileEmployer', [ProfilEmployerController::class, 'store'])->name('employer.profile.store'); 
+        Route::post('/profileEmployer', [ProfilEmployerController::class, 'store'])->name('employer.profile.store');
         Route::get('/profileEmployer/edit', [ProfilEmployerController::class, 'edit'])->name('employer.profile.edit'); // Show form to edit employer profile
         Route::put('/profileEmployer/update', [ProfilEmployerController::class, 'update'])->name('employer.profile.update'); // Update employer profile
-        Route::delete('/profile',[ProfileController::class , 'destroy'])->name('profile.destroy');
+        Route::delete('/profile',[ProfileController::class , 'destroy'])->name('employer.profile.destroy');
 
 
 
         //logout Employer dashboard
-        Route::get('/employer/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+        Route::get('/employer/logout', [AuthenticatedSessionController::class, 'destroy'])->name('employer.logout');
     });
 
 
     Route::get('/test', [TestEmailController::class, 'testEmail']);
 
 
- /*    Route::get('/test', function () {
-        try {
-            Mail::raw('This is a test email!', function ($message) {
-                $message->to('aymanel2025@gmail.com')
-                        ->subject('Test Email')
-                        ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-            });
-            return 'Test email sent!';
-        } catch (\Exception $e) {
-            return 'Error: ' . $e->getMessage();
-        }
-    });
- */
-
-
-   /*  Route::get('/test', function () {
-        dd(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-    }); */
-    
-  /*   Route::get('/test', function () {
-        return [
-            'MAIL_FROM_ADDRESS' => env('MAIL_FROM_ADDRESS'),
-            'MAIL_FROM_NAME' => env('MAIL_FROM_NAME'),
-        ];
-    }); */
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*  Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
-
-Route::middleware(['auth'])->group(function () {
-
-    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard');
-
-    //**************************** /* Job Management ************************************
-
-    // Affiche la liste des offres d'emploi
-    Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
-
-    // Formulaire de création d'une nouvelle offre d'emploi
-    Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
-
-    // Enregistrer une nouvelle offre d'emploi
-    Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
-
-    // Afficher le formulaire d'édition pour une offre spécifique
-    Route::get('/jobs/{id}/edit', [JobController::class, 'edit'])->name('jobs.edit');
-
-    // Mettre à jour une offre d'emploi spécifique
-    Route::put('/jobs/{id}', [JobController::class, 'update'])->name('jobs.update');
-
-    // Supprimer une offre d'emploi
-    Route::delete('/jobs/{id}', [JobController::class, 'destroy'])->name('jobs.destroy');
-
-    // Filtrer les offres d'emploi par critères
-    Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
-
-    
-    //****************************  JobSeeker Management ************************************
-
-    // Route to display the list of job seekers
-    Route::get('/jobseekers', [ProfilJobseekerController::class, 'index'])->name('jobseeker.index');
-
-    // Route to show the form for creating a new job seeker profile
-    Route::get('/jobseekers/create', [ProfilJobseekerController::class, 'create'])->name('jobseeker.create');
-
-    // Route to save a new job seeker profile
-    Route::post('/jobseekers', [ProfilJobseekerController::class, 'store'])->name('jobseeker.store');
-
-    // Route to show the edit form for a specific job seeker profile
-    Route::get('/jobseekers/{id}/edit', [ProfilJobseekerController::class, 'edit'])->name('jobseeker.edit');
-
-    // Route to update a specific job seeker profile
-    Route::put('/jobseekers/{id}', [ProfilJobseekerController::class, 'update'])->name('jobseeker.update');
-
-    // Route to delete a specific job seeker profile
-    Route::delete('/jobseekers/{id}', [ProfilJobseekerController::class, 'destroy'])->name('jobseeker.destroy');
-
-    // Route to filter job seekers by criteria
-    Route::get('/jobseekers/search', [ProfilJobseekerController::class, 'search'])->name('jobseeker.search');
-
-
-    //**************************** Employer Management ************************************
-
-    // Route to display the list of employers
-    Route::get('/employers', [ProfilEmployerController::class, 'index'])->name('employers.index');
-
-    // Route to show the form for creating a new employer
-    Route::get('/employers/create', [ProfilEmployerController::class, 'create'])->name('employers.create');
-
-    // Route to store a new employer in the database
-    Route::post('/employers', [ProfilEmployerController::class, 'store'])->name('employers.store');
-
-    // Route to show the details of a specific employer
-    Route::get('/employers/{id}', [ProfilEmployerController::class, 'show'])->name('employers.show');
-
-    // Route to show the form for editing a specific employer
-    Route::get('/employers/{id}/edit', [ProfilEmployerController::class, 'edit'])->name('employers.edit');
-
-    // Route to update a specific employer's information
-    Route::put('/employers/{id}', [ProfilEmployerController::class, 'update'])->name('employers.update');
-
-    // Route to delete a specific employer from the database
-    Route::delete('/employers/{id}', [ProfilEmployerController::class, 'destroy'])->name('employers.destroy');
-
-    // Route to filter employer by criteria
-    Route::get('/employer/search', [ProfilEmployerController::class, 'search'])->name('employers.search');
-
-
-    //**************************** Application Management ************************************
-
-    // Route to display the list of all applications
-    Route::get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
-
-    // Route to display a specific application by its ID
-    Route::get('/applications/{id}', [ApplicationController::class, 'show'])->where('id', '[0-9]+') ->name('applications.show');
-
-    // Route to delete a specific application by its ID
-    Route::delete('/applications/{id}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
-
-    // Route to search for applications based on specified criteria
-    Route::get('/applications/search', [ApplicationController::class, 'search'])->name('applications.search');
-
-
-    
-}); */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-    // Ajouter d'autres routes spécifiques à l'admin ici
-});
-
-Route::middleware(['auth', 'role:Employer'])->group(function () {
-    Route::get('/employer', [ProfilEmployerController::class, 'index'])->name('employer.dashboard');
-    // Ajouter d'autres routes spécifiques à l'employeur ici
-});
-
-Route::middleware(['auth', 'role:Job Seeker'])->group(function () {
-    Route::get('/job-seeker', [ProfilJobseekerController::class, 'index'])->name('jobseeker.dashboard');
-    // Ajouter d'autres routes spécifiques aux chercheurs d'emploi ici
-}); */
-require __DIR__.'/auth.php'; 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-// Routes protégées nécessitant l'authentification
-Route::middleware(['auth'])->group(function () {
-    Route::controller(ProfileController::class)->group(function () {
-        Route::get('/profile', 'edit')->name('profile.edit');
-        Route::patch('/profile', 'update')->name('profile.update');
-        Route::delete('/profile', 'destroy')->name('profile.destroy');
-    });
-});
-
-// Routes pour les utilisateurs Admin
-Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-    // Ajouter d'autres routes spécifiques à l'admin ici
-});
-
-// Routes pour les employeurs
-Route::middleware(['auth', 'role:Employer'])->group(function () {
-    Route::get('/employer', [ProfilEmployerController::class, 'index'])->name('employer.dashboard');
-    // Ajouter d'autres routes spécifiques à l'employeur ici
-});
-
-// Routes pour les chercheurs d'emploi
-Route::middleware(['auth', 'role:Job Seeker'])->group(function () {
-    Route::get('/job-seeker', [ProfilJobseekerController::class, 'index'])->name('jobseeker.dashboard');
-    // Ajouter d'autres routes spécifiques aux chercheurs d'emploi ici
-}); */
+require __DIR__.'/auth.php';

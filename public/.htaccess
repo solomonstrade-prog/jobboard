@@ -5,6 +5,11 @@
 
     RewriteEngine On
 
+    # Force HTTPS (cPanel production). Comment out the next two lines
+    # if your domain is not yet behind SSL or you are testing on HTTP.
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

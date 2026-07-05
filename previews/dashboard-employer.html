@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Employer Dashboard — JobBoard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'] }, colors: { brand: { 50:'#eef2ff',100:'#e0e7ff',500:'#6366f1',600:'#4f46e5',700:'#4338ca' } } } }
+  };
+</script>
+<style>body{font-family:'Inter',system-ui,sans-serif}</style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+<div class="min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="hidden lg:flex lg:flex-col w-64 border-r border-slate-200 bg-white">
+    <a href="index.html" class="h-16 flex items-center gap-2 px-6 border-b border-slate-200">
+      <div class="w-9 h-9 rounded-lg bg-brand-600 text-white grid place-items-center font-bold">JB</div>
+      <span class="font-bold text-slate-900 text-lg">JobBoard</span>
+    </a>
+    <div class="px-4 py-4 border-b border-slate-200">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-700 grid place-items-center font-bold text-sm">CN</div>
+        <div class="min-w-0">
+          <div class="text-sm font-semibold text-slate-900 truncate">CloudNine Systems</div>
+          <div class="text-xs text-slate-500">Employer account</div>
+        </div>
+      </div>
+    </div>
+    <nav class="flex-1 px-3 py-4 space-y-0.5 text-sm">
+      <a href="dashboard-employer.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-brand-50 text-brand-700 font-semibold">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Overview
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        My job posts
+        <span class="ml-auto text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">12</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Applicants
+        <span class="ml-auto text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full">18 new</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>
+        Messages
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Company profile
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+        Settings
+      </a>
+    </nav>
+    <div class="p-3 border-t border-slate-200">
+      <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 text-sm">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign out
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main column -->
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="h-16 border-b border-slate-200 bg-white flex items-center justify-between px-4 sm:px-6">
+      <div class="flex items-center gap-3 flex-1 max-w-xl">
+        <button class="lg:hidden text-slate-500"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div class="relative flex-1">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-3.5-3.5"/></svg>
+          <input type="text" placeholder="Search applicants, jobs…" class="w-full pl-9 pr-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white" />
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="text-sm font-semibold bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-700 inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Post a job
+        </button>
+        <button class="relative w-9 h-9 rounded-lg hover:bg-slate-100 grid place-items-center text-slate-500">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full"></span>
+        </button>
+        <div class="flex items-center gap-2 pl-3 border-l border-slate-200">
+          <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 grid place-items-center font-bold text-sm">MK</div>
+          <div class="hidden sm:block">
+            <div class="text-sm font-semibold text-slate-900 leading-tight">Maya Khan</div>
+            <div class="text-xs text-slate-500">Hiring manager</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+        <div>
+          <h1 class="text-2xl font-bold text-slate-900">Employer overview</h1>
+          <p class="text-slate-500 mt-1">Track your job posts and applicants at a glance.</p>
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+          <span class="text-slate-500">Period:</span>
+          <select class="border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-brand-500">
+            <option>Last 30 days</option>
+            <option>Last 90 days</option>
+            <option>Year to date</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <section class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 grid place-items-center">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">+3</span>
+          </div>
+          <div class="mt-3 text-2xl font-bold text-slate-900">12</div>
+          <div class="text-sm text-slate-500">Active job posts</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 grid place-items-center">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">+18 this week</span>
+          </div>
+          <div class="mt-3 text-2xl font-bold text-slate-900">147</div>
+          <div class="text-sm text-slate-500">Total applicants</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 grid place-items-center">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+          </div>
+          <div class="mt-3 text-2xl font-bold text-slate-900">23</div>
+          <div class="text-sm text-slate-500">Pending review</div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+          <div class="flex items-center justify-between">
+            <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 grid place-items-center">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <div class="mt-3 text-2xl font-bold text-slate-900">4</div>
+          <div class="text-sm text-slate-500">Hires this month</div>
+        </div>
+      </section>
+
+      <!-- Charts row -->
+      <section class="grid lg:grid-cols-3 gap-6">
+        <!-- Applications over time (bar chart) -->
+        <div class="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <h2 class="font-semibold text-slate-900">Applications over time</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Last 6 months</p>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-slate-500">
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-brand-500"></span> Applications</span>
+            </div>
+          </div>
+          <div class="h-56 flex items-end gap-3 sm:gap-6">
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full bg-brand-500 rounded-t-md" style="height:35%"></div>
+              <div class="text-xs text-slate-500">Feb</div>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full bg-brand-500 rounded-t-md" style="height:48%"></div>
+              <div class="text-xs text-slate-500">Mar</div>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full bg-brand-500 rounded-t-md" style="height:62%"></div>
+              <div class="text-xs text-slate-500">Apr</div>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full bg-brand-500 rounded-t-md" style="height:55%"></div>
+              <div class="text-xs text-slate-500">May</div>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full bg-brand-500 rounded-t-md" style="height:80%"></div>
+              <div class="text-xs text-slate-500">Jun</div>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full bg-brand-500 rounded-t-md" style="height:95%"></div>
+              <div class="text-xs text-slate-500">Jul</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Application status (donut) -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5">
+          <h2 class="font-semibold text-slate-900">Application status</h2>
+          <p class="text-xs text-slate-500 mt-0.5">All open positions</p>
+          <div class="mt-5 flex items-center justify-center">
+            <!-- SVG donut: 147 total; 23 pending (15.6%), 89 approved (60.5%), 35 rejected (23.8%) -->
+            <svg viewBox="0 0 42 42" class="w-40 h-40 -rotate-90">
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#e2e8f0" stroke-width="6"></circle>
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#f59e0b" stroke-width="6" stroke-dasharray="15.6 84.4" stroke-dashoffset="0"></circle>
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#10b981" stroke-width="6" stroke-dasharray="60.5 39.5" stroke-dashoffset="-15.6"></circle>
+              <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#ef4444" stroke-width="6" stroke-dasharray="23.8 76.2" stroke-dashoffset="-76.1"></circle>
+            </svg>
+          </div>
+          <div class="mt-5 space-y-2 text-sm">
+            <div class="flex items-center justify-between"><span class="flex items-center gap-2 text-slate-600"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span> Approved</span><span class="font-semibold text-slate-900">89 · 60.5%</span></div>
+            <div class="flex items-center justify-between"><span class="flex items-center gap-2 text-slate-600"><span class="w-2.5 h-2.5 rounded-sm bg-rose-500"></span> Rejected</span><span class="font-semibold text-slate-900">35 · 23.8%</span></div>
+            <div class="flex items-center justify-between"><span class="flex items-center gap-2 text-slate-600"><span class="w-2.5 h-2.5 rounded-sm bg-amber-500"></span> Pending</span><span class="font-semibold text-slate-900">23 · 15.6%</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Applicants table -->
+      <section class="bg-white border border-slate-200 rounded-2xl">
+        <div class="p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <h2 class="font-semibold text-slate-900">Recent applicants</h2>
+            <p class="text-xs text-slate-500 mt-0.5">18 new in the last 7 days</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <select class="text-sm border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <option>All jobs</option>
+              <option>Senior Full-Stack Engineer</option>
+              <option>Cloud Infrastructure Engineer</option>
+              <option>Machine Learning Engineer</option>
+            </select>
+            <select class="text-sm border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <option>All statuses</option>
+              <option>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+              <tr>
+                <th class="text-left font-semibold px-5 py-3">Candidate</th>
+                <th class="text-left font-semibold px-5 py-3">Role applied for</th>
+                <th class="text-left font-semibold px-5 py-3">Status</th>
+                <th class="text-left font-semibold px-5 py-3">Applied</th>
+                <th class="text-right font-semibold px-5 py-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50">
+                <td class="px-5 py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 grid place-items-center font-bold text-xs">SM</div>
+                    <div>
+                      <div class="font-semibold text-slate-900">Sophie Martin</div>
+                      <div class="text-xs text-slate-500">sophie.martin@example.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-3 text-slate-700">Senior Full-Stack Engineer</td>
+                <td class="px-5 py-3"><span class="text-xs font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">Pending</span></td>
+                <td class="px-5 py-3 text-slate-500">3 days ago</td>
+                <td class="px-5 py-3 text-right">
+                  <div class="inline-flex items-center gap-2">
+                    <button class="text-xs font-semibold text-emerald-700 hover:text-emerald-800">Approve</button>
+                    <span class="text-slate-300">·</span>
+                    <button class="text-xs font-semibold text-rose-700 hover:text-rose-800">Reject</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-5 py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-rose-100 text-rose-700 grid place-items-center font-bold text-xs">LO</div>
+                    <div>
+                      <div class="font-semibold text-slate-900">Liam OConnor</div>
+                      <div class="text-xs text-slate-500">liam.oconnor@example.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-3 text-slate-700">Cloud Infrastructure Engineer</td>
+                <td class="px-5 py-3"><span class="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Approved</span></td>
+                <td class="px-5 py-3 text-slate-500">1 day ago</td>
+                <td class="px-5 py-3 text-right">
+                  <button class="text-xs font-semibold text-brand-700 hover:text-brand-800">View profile</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-5 py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-violet-100 text-violet-700 grid place-items-center font-bold text-xs">AK</div>
+                    <div>
+                      <div class="font-semibold text-slate-900">Aisha Khan</div>
+                      <div class="text-xs text-slate-500">aisha.khan@example.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-3 text-slate-700">Machine Learning Engineer</td>
+                <td class="px-5 py-3"><span class="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">Approved</span></td>
+                <td class="px-5 py-3 text-slate-500">5 days ago</td>
+                <td class="px-5 py-3 text-right">
+                  <button class="text-xs font-semibold text-brand-700 hover:text-brand-800">View profile</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-5 py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 grid place-items-center font-bold text-xs">EW</div>
+                    <div>
+                      <div class="font-semibold text-slate-900">Ethan Wright</div>
+                      <div class="text-xs text-slate-500">ethan.wright@example.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-3 text-slate-700">Engineering Manager</td>
+                <td class="px-5 py-3"><span class="text-xs font-medium text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full">Rejected</span></td>
+                <td class="px-5 py-3 text-slate-500">1 week ago</td>
+                <td class="px-5 py-3 text-right">
+                  <button class="text-xs font-semibold text-brand-700 hover:text-brand-800">View profile</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-5 py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-amber-100 text-amber-700 grid place-items-center font-bold text-xs">MR</div>
+                    <div>
+                      <div class="font-semibold text-slate-900">Mateo Rossi</div>
+                      <div class="text-xs text-slate-500">mateo.rossi@example.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-5 py-3 text-slate-700">Frontend Engineer (React)</td>
+                <td class="px-5 py-3"><span class="text-xs font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">Pending</span></td>
+                <td class="px-5 py-3 text-slate-500">2 days ago</td>
+                <td class="px-5 py-3 text-right">
+                  <div class="inline-flex items-center gap-2">
+                    <button class="text-xs font-semibold text-emerald-700 hover:text-emerald-800">Approve</button>
+                    <span class="text-slate-300">·</span>
+                    <button class="text-xs font-semibold text-rose-700 hover:text-rose-800">Reject</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="p-4 border-t border-slate-100 flex items-center justify-between text-sm">
+          <span class="text-slate-500">Showing 5 of 147 applicants</span>
+          <a href="#" class="font-semibold text-brand-700 hover:text-brand-800">View all →</a>
+        </div>
+      </section>
+
+      <!-- My job posts -->
+      <section class="bg-white border border-slate-200 rounded-2xl">
+        <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+          <h2 class="font-semibold text-slate-900">My job posts</h2>
+          <a href="#" class="text-sm font-semibold text-brand-700 hover:text-brand-800">Manage all posts →</a>
+        </div>
+        <div class="divide-y divide-slate-100">
+          <div class="p-5 flex items-center gap-4">
+            <div class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-700 grid place-items-center font-bold text-sm">SF</div>
+            <div class="flex-1 min-w-0">
+              <a href="job-detail.html" class="font-semibold text-slate-900 hover:text-brand-700">Senior Full-Stack Engineer</a>
+              <div class="text-xs text-slate-500 mt-0.5">Posted 14 days ago · Full-time · $125k</div>
+            </div>
+            <div class="hidden sm:flex items-center gap-6 text-sm">
+              <div class="text-center">
+                <div class="font-semibold text-slate-900">42</div>
+                <div class="text-xs text-slate-500">Applicants</div>
+              </div>
+              <div class="text-center">
+                <div class="font-semibold text-emerald-600">28</div>
+                <div class="text-xs text-slate-500">Approved</div>
+              </div>
+              <div class="text-center">
+                <div class="font-semibold text-amber-600">8</div>
+                <div class="text-xs text-slate-500">Pending</div>
+              </div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+            </span>
+          </div>
+          <div class="p-5 flex items-center gap-4">
+            <div class="w-10 h-10 rounded-lg bg-sky-100 text-sky-700 grid place-items-center font-bold text-sm">CI</div>
+            <div class="flex-1 min-w-0">
+              <a href="job-detail.html" class="font-semibold text-slate-900 hover:text-brand-700">Cloud Infrastructure Engineer</a>
+              <div class="text-xs text-slate-500 mt-0.5">Posted 9 days ago · Full-time · $135k</div>
+            </div>
+            <div class="hidden sm:flex items-center gap-6 text-sm">
+              <div class="text-center"><div class="font-semibold text-slate-900">31</div><div class="text-xs text-slate-500">Applicants</div></div>
+              <div class="text-center"><div class="font-semibold text-emerald-600">19</div><div class="text-xs text-slate-500">Approved</div></div>
+              <div class="text-center"><div class="font-semibold text-amber-600">6</div><div class="text-xs text-slate-500">Pending</div></div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+            </span>
+          </div>
+          <div class="p-5 flex items-center gap-4">
+            <div class="w-10 h-10 rounded-lg bg-violet-100 text-violet-700 grid place-items-center font-bold text-sm">ML</div>
+            <div class="flex-1 min-w-0">
+              <a href="job-detail.html" class="font-semibold text-slate-900 hover:text-brand-700">Machine Learning Engineer</a>
+              <div class="text-xs text-slate-500 mt-0.5">Posted 21 days ago · Full-time · $145k</div>
+            </div>
+            <div class="hidden sm:flex items-center gap-6 text-sm">
+              <div class="text-center"><div class="font-semibold text-slate-900">38</div><div class="text-xs text-slate-500">Applicants</div></div>
+              <div class="text-center"><div class="font-semibold text-emerald-600">22</div><div class="text-xs text-slate-500">Approved</div></div>
+              <div class="text-center"><div class="font-semibold text-amber-600">5</div><div class="text-xs text-slate-500">Pending</div></div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+            </span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>

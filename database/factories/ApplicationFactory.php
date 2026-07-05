@@ -14,7 +14,7 @@ class ApplicationFactory extends Factory
         return [
             'id_jobseeker' => null,
             'id_job'       => null,
-            'status'       => $this->faker->randomElement(['pending', 'accepted', 'rejected']),
+            'status'       => $this->faker->randomElement(['pending', 'approved', 'rejected']),
             'cover_letter' => $this->faker->paragraph(2),
             'resume'       => null,
         ];

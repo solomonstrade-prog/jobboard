@@ -35,10 +35,12 @@ class JobseekerJobController extends Controller
     // Get the authenticated user's profile
     $user = auth()->user();
 
-    
+    if (!$user->profile) {
+        return redirect()->back()->with('error', 'Please create your profile before applying.');
+    }
 
     $request->validate([
-        'resume' => 'nullable|file|max:2048', // Validate uploaded file
+        'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // Validate uploaded file
         'cover_letter' => 'required|string|max:2000',
     ]);
 
@@ -132,6 +134,9 @@ class JobseekerJobController extends Controller
 
     public function saveJob(Request $request, $id){
         $user = auth()->user();
+        if (!$user->profile) {
+            return back()->with('error', 'Please create your profile first.');
+        }
         $profile = $user->profile;
 
          // Vérifiez si l'emploi est déjà sauvegardé
@@ -150,7 +155,7 @@ class JobseekerJobController extends Controller
         $savedJob = new SavedJob();
         $savedJob->id_utilisateur = $user->id;
         $savedJob->job_id = $id;
-        $savedJob->profile_id = $profile ? $profile->id : null;
+        $savedJob->profile_id = $profile->id;
 
         // Sauvegarder l'emploi en base de données avec save()
         $savedJob->save();

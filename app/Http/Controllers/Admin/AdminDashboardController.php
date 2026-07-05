@@ -23,18 +23,22 @@ class AdminDashboardController extends Controller
     $totalUsers = $totalJobseekers + $totalEmployers;
 
     // Monthly application counts
-    $monthlyApplications = Application::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+    $monthExpr = \DB::connection()->getDriverName() === 'sqlite'
+        ? "strftime('%m', created_at)"
+        : 'MONTH(created_at)';
+
+    $monthlyApplications = Application::selectRaw("{$monthExpr} as month, COUNT(*) as count")
         ->groupBy('month')
         ->orderBy('month')   
         ->get();
 
     // Monthly user counts for ProfilJobseeker
-    $monthlyProfilJobseekers = ProfilJobseeker::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+    $monthlyProfilJobseekers = ProfilJobseeker::selectRaw("{$monthExpr} as month, COUNT(*) as count")
         ->groupBy('month')
         ->orderBy('month');
 
     // Monthly user counts for Employer
-    $monthlyEmployers = ProfilEmployer::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+    $monthlyEmployers = ProfilEmployer::selectRaw("{$monthExpr} as month, COUNT(*) as count")
         ->groupBy('month')
         ->orderBy('month');
 

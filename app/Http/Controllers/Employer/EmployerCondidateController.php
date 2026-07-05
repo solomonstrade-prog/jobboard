@@ -13,7 +13,11 @@ class EmployerCondidateController extends Controller
     
     public function candidates(){
 
-        $employerId = auth()->user()->profile->id; // ID de l'employeur connecté
+        $employerProfile = auth()->user()->profile;
+        if (!$employerProfile) {
+            return redirect()->route('employer.profile.create')->with('error', 'Please create your employer profile first.');
+        }
+        $employerId = $employerProfile->id; // ID de l'employeur connecté
 
         $candidates =Application::whereHas('job',function ($query) use ($employerId){
             $query->where('id_employeur', $employerId); // Filtrer les emplois de cet employeur

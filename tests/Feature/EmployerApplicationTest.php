@@ -66,18 +66,18 @@ class EmployerApplicationTest extends TestCase
     }
 
     /** @test */
-    public function test_employer_can_update_application_status_to_accepted(): void
+    public function test_employer_can_update_application_status_to_approved(): void
     {
         $user        = $this->makeEmployer();
         $application = $this->makeApplication($user);
 
         $response = $this->actingAs($user)
-            ->put("/applications/{$application->id}/status", ['status' => 'accepted']);
+            ->put("/applications/{$application->id}/status", ['status' => 'approved']);
 
         $response->assertRedirect();
         $this->assertDatabaseHas('applications', [
             'id'     => $application->id,
-            'status' => 'accepted',
+            'status' => 'approved',
         ]);
     }
 

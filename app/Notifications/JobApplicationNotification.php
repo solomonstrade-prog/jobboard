@@ -34,7 +34,7 @@ class JobApplicationNotification extends Notification implements ShouldQueue
                     ->subject('New Job Application')
                     ->greeting('Hello ' . $notifiable->name)
                     ->line('A new job application has been submitted.')
-                    ->line('**Job Title:** ' . $this->job->title)
+                    ->line('**Job Title:** ' . $this->job->titre)
                     ->line('**Applicant Name:** ' . $this->jobseeker->fullName)
                     ->line('Check your dashboard for more details.')
                     ->action('View Application', url('/employer/applications'))

@@ -50,7 +50,7 @@ class AdminApplicationController extends Controller
 
     public function search(Request $request)
     {
-    $quer = $request->input('quer'); // Récupérer la requête de recherche
+    $query = $request->input('query'); // Récupérer la requête de recherche
 
     // Valider la requête (facultatif)
     $request->validate([
@@ -58,10 +58,10 @@ class AdminApplicationController extends Controller
     ]);
 
     // Rechercher dans les colonnes 'fullName' et 'titre' de la table 'applications'
-    $applications = Application::whereHas('profilJobseeker', function($q) use ($quer) {
-        $q->where('fullName', 'like', '%' . $quer . '%');
-    })->orWhereHas('job', function($q) use ($quer) {
-        $q->where('titre', 'like', '%' . $quer . '%');
+    $applications = Application::whereHas('profilJobseeker', function($q) use ($query) {
+        $q->where('fullName', 'like', '%' . $query . '%');
+    })->orWhereHas('job', function($q) use ($query) {
+        $q->where('titre', 'like', '%' . $query . '%');
     })->get();
 
     // Retourner les résultats de la recherche à une vue

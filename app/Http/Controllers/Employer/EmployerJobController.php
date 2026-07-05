@@ -14,17 +14,25 @@ class EmployerJobController extends Controller
 
     public function dashboardEmployer() {
         // Get the ID of the currently authenticated employer
-        $employerId = auth()->user()->profile->id;
+        $employerProfile = auth()->user()->profile;
+        if (!$employerProfile) {
+            return redirect()->route('employer.profile.create')->with('error', 'Please create your employer profile first.');
+        }
+        $employerId = $employerProfile->id;
     
+        $monthExpr = \DB::connection()->getDriverName() === 'sqlite'
+            ? "strftime('%m', created_at)"
+            : 'MONTH(created_at)';
+
         // Retrieve the monthly job postings for the authenticated employer
-        $monthlyPostings = Job::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        $monthlyPostings = Job::selectRaw("{$monthExpr} as month, COUNT(*) as count")
             ->where('id_employeur', $employerId) // Filter jobs by the authenticated employer
             ->groupBy('month') // Group results by month
             ->orderBy('month') // Order results by month
             ->get(); // Execute the query and get the results
     
         // Retrieve the monthly applications for jobs associated with the authenticated employer
-        $monthlyApplications = Application::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        $monthlyApplications = Application::selectRaw("{$monthExpr} as month, COUNT(*) as count")
             ->whereHas('job', function ($query) use ($employerId) {
                 $query->where('id_employeur', $employerId); // Filter applications by jobs of this employer
             })
@@ -71,12 +79,19 @@ class EmployerJobController extends Controller
 
     public function create()
     {
+        if (!auth()->user()->profile) {
+            return redirect()->route('employer.profile.create')->with('error', 'Please create your employer profile first.');
+        }
         return view("Employer.createjob"); 
     }
 
     public function index()
     {
-        $employerId = auth()->user()->profile->id;
+        $employerProfile = auth()->user()->profile;
+        if (!$employerProfile) {
+            return redirect()->route('employer.profile.create')->with('error', 'Please create your employer profile first.');
+        }
+        $employerId = $employerProfile->id;
         $jobs = Job::where('id_employeur',$employerId)->paginate(3);
         
         return view("Employer.jobs", compact('jobs'));
@@ -86,6 +101,11 @@ class EmployerJobController extends Controller
     // Store a newly created job posting
     public function store(Request $request)
     {
+        $employerProfile = auth()->user()->profile;
+        if (!$employerProfile) {
+            return redirect()->route('employer.profile.create')->with('error', 'Please create your employer profile first.');
+        }
+
         $data = $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string',
@@ -98,7 +118,7 @@ class EmployerJobController extends Controller
         ]);
 
         
-        auth()->user()->profile->jobs()->create($data);
+        $employerProfile->jobs()->create($data);
         
         return redirect()->route('employer.jobs.index')->with('success', 'Job posted successfully!');
     }
@@ -112,6 +132,9 @@ class EmployerJobController extends Controller
     public function edit($id)
     {
         $job = Job::findOrFail($id);
+        if ($job->id_employeur !== auth()->user()->profile->id) {
+            abort(403, 'Unauthorized action.');
+        }
         return view("Employer.editjob", compact('job'));
     }
 
@@ -120,6 +143,10 @@ class EmployerJobController extends Controller
     {
         
         $job = Job::findOrFail($id);
+
+        if ($job->id_employeur !== auth()->user()->profile->id) {
+            abort(403, 'Unauthorized action.');
+        }
 
         $request->validate([
             'titre' => 'nullable|string|max:255',
@@ -156,6 +183,9 @@ class EmployerJobController extends Controller
     public function destroy($id)
     {
         $job = Job::findOrFail($id);
+        if ($job->id_employeur !== auth()->user()->profile->id) {
+            abort(403, 'Unauthorized action.');
+        }
         $job->delete();
 
         return redirect()->route('employer.jobs.index')->with('success', 'Job deleted successfully!');
@@ -164,9 +194,14 @@ class EmployerJobController extends Controller
 
     public function search(Request $request)
 {
+    $employerProfile = auth()->user()->profile;
+    if (!$employerProfile) {
+        return redirect()->route('employer.profile.create')->with('error', 'Please create your employer profile first.');
+    }
+
     $keyword = $request->input('keyword');
 
-    $query = Job::query();
+    $query = Job::where('id_employeur', $employerProfile->id);
 
     if ($keyword) {
         // Apply filters based on the keyword

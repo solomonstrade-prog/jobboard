@@ -121,7 +121,7 @@ class AdminProfilJobseekerController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->input('fullName'); // Get search query from the request
+        $query = $request->input('query'); // Get search query from the request
     
         // Validate the search query (optional)
         $request->validate([

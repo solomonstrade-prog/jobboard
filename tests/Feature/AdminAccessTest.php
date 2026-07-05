@@ -159,12 +159,12 @@ class AdminAccessTest extends TestCase
 
         // Route: PUT /application/{application}/status (named: updateStatus)
         $response = $this->actingAs($this->adminUser())
-            ->put("/application/{$application->id}/status", ['status' => 'accepted']);
+            ->put("/application/{$application->id}/status", ['status' => 'approved']);
 
         $response->assertRedirect();
         $this->assertDatabaseHas('applications', [
             'id'     => $application->id,
-            'status' => 'accepted',
+            'status' => 'approved',
         ]);
     }
 

@@ -32,7 +32,7 @@ class JobApplicationMail extends Mailable
                     ->with([
                         'jobTitle' => $this->jobTitle,
                         'jobSeekerName' => $this->jobSeekerName,
-                    ]);;
+                    ]);
     }
 
 

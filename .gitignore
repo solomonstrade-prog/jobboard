@@ -17,3 +17,12 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/laravel
+
+/storage/framework/sessions/*
+/storage/framework/cache/*
+/storage/logs/*
+migration_debug.log
+migration_error.log
+migration_output.txt
+

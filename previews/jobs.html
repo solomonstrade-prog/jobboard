@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Browse Jobs — JobBoard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'] } } }
+  };
+</script>
+<style>body{font-family:'Inter',system-ui,sans-serif}</style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+<!-- Header -->
+<header class="border-b border-slate-200 bg-white sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-lg bg-brand-600 text-white grid place-items-center font-bold">JB</div>
+      <span class="font-bold text-slate-900 text-lg">JobBoard</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+      <a href="index.html" class="hover:text-slate-900">Home</a>
+      <a href="jobs.html" class="text-brand-700">Browse Jobs</a>
+      <a href="dashboard-employer.html" class="hover:text-slate-900">For Employers</a>
+      <a href="dashboard-jobseeker.html" class="hover:text-slate-900">For Job Seekers</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="login.html" class="text-sm font-medium text-slate-700 hover:text-slate-900">Sign in</a>
+      <a href="register.html" class="text-sm font-medium bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-700">Get started</a>
+    </div>
+  </div>
+</header>
+
+<!-- Search bar -->
+<section class="bg-white border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <form class="bg-slate-50 border border-slate-200 rounded-xl p-2 flex flex-col md:flex-row gap-2">
+      <div class="flex-1 flex items-center gap-2 px-3">
+        <svg class="w-5 h-5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-3.5-3.5"/></svg>
+        <input type="text" placeholder="Search by job title, skill, or company" value="Engineer" class="w-full py-2.5 text-sm bg-transparent focus:outline-none" />
+      </div>
+      <div class="flex-1 flex items-center gap-2 px-3 md:border-l border-slate-200">
+        <svg class="w-5 h-5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <input type="text" placeholder="Location" value="Remote" class="w-full py-2.5 text-sm bg-transparent focus:outline-none" />
+      </div>
+      <button class="bg-brand-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-brand-700">Search</button>
+    </form>
+  </div>
+</section>
+
+<!-- Main -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+  <!-- Filters -->
+  <aside class="lg:col-span-3 space-y-5">
+    <div class="bg-white border border-slate-200 rounded-2xl p-5">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-semibold text-slate-900">Filters</h3>
+        <button class="text-xs text-brand-700 hover:text-brand-800 font-medium">Reset</button>
+      </div>
+
+      <div class="space-y-5 text-sm">
+        <div>
+          <div class="font-medium text-slate-700 mb-2">Category</div>
+          <div class="space-y-1.5">
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600" checked> <span>IT <span class="text-slate-400">(12)</span></span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>Design <span class="text-slate-400">(7)</span></span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>Marketing <span class="text-slate-400">(5)</span></span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>Finance <span class="text-slate-400">(4)</span></span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>HR <span class="text-slate-400">(3)</span></span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>Engineering <span class="text-slate-400">(2)</span></span></label>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-100 pt-5">
+          <div class="font-medium text-slate-700 mb-2">Job type</div>
+          <div class="space-y-1.5">
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600" checked> <span>Full-time</span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>Part-time</span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600" checked> <span>Remote</span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>Contract</span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>Freelance</span></label>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-100 pt-5">
+          <div class="font-medium text-slate-700 mb-2">Contract</div>
+          <div class="space-y-1.5">
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600" checked> <span>CDI</span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>CDD</span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>Internship</span></label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-brand-600"> <span>Freelance</span></label>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-100 pt-5">
+          <div class="font-medium text-slate-700 mb-2">Salary range</div>
+          <div class="flex items-center gap-2">
+            <input type="number" placeholder="Min" value="60" class="w-full border border-slate-200 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            <span class="text-slate-400">—</span>
+            <input type="number" placeholder="Max" value="180" class="w-full border border-slate-200 rounded-md px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            <span class="text-xs text-slate-500">k</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Results -->
+  <section class="lg:col-span-9">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+      <div>
+        <h1 class="text-xl font-bold text-slate-900">1,247 jobs match your search</h1>
+        <p class="text-sm text-slate-500">Updated 2 minutes ago</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <select class="text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">
+          <option>Most recent</option>
+          <option>Salary: high to low</option>
+          <option>Salary: low to high</option>
+          <option>Best match</option>
+        </select>
+        <div class="flex border border-slate-200 rounded-lg overflow-hidden">
+          <button class="px-3 py-2 bg-slate-100 text-slate-700" title="List view">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+          <button class="px-3 py-2 bg-white text-slate-400 hover:text-slate-700" title="Grid view">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active filter chips -->
+    <div class="flex flex-wrap gap-2 mb-5">
+      <span class="inline-flex items-center gap-1.5 bg-brand-50 text-brand-700 text-xs font-medium px-2.5 py-1 rounded-full">IT <button class="hover:text-brand-900">×</button></span>
+      <span class="inline-flex items-center gap-1.5 bg-brand-50 text-brand-700 text-xs font-medium px-2.5 py-1 rounded-full">Full-time <button class="hover:text-brand-900">×</button></span>
+      <span class="inline-flex items-center gap-1.5 bg-brand-50 text-brand-700 text-xs font-medium px-2.5 py-1 rounded-full">Remote <button class="hover:text-brand-900">×</button></span>
+      <span class="inline-flex items-center gap-1.5 bg-brand-50 text-brand-700 text-xs font-medium px-2.5 py-1 rounded-full">CDI <button class="hover:text-brand-900">×</button></span>
+    </div>
+
+    <!-- Job cards -->
+    <div class="space-y-3">
+      <!-- Job 1 -->
+      <a href="job-detail.html" class="block bg-white border border-slate-200 rounded-2xl p-5 hover:border-brand-300 hover:shadow-sm transition">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 grid place-items-center font-bold shrink-0">CN</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="font-semibold text-slate-900">Senior Full-Stack Engineer</h3>
+                <p class="text-sm text-slate-500 mt-0.5">CloudNine Systems · Seattle, WA · Remote-friendly</p>
+              </div>
+              <button class="text-slate-400 hover:text-rose-500 shrink-0" title="Save">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+              </button>
+            </div>
+            <p class="text-sm text-slate-600 mt-2 line-clamp-2">Design, build, and operate production services end-to-end. You will own architecture decisions, mentor mid-level engineers, and partner with product on roadmap.</p>
+            <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">IT</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">Full-time</span>
+              <span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-medium">CDI</span>
+              <span class="text-slate-400">·</span>
+              <span class="font-semibold text-slate-900">$125,000</span>
+              <span class="text-slate-400">·</span>
+              <span class="text-slate-500">Posted 3 days ago</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="block bg-white border border-slate-200 rounded-2xl p-5 hover:border-brand-300 hover:shadow-sm transition">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-700 grid place-items-center font-bold shrink-0">CN</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="font-semibold text-slate-900">Cloud Infrastructure Engineer</h3>
+                <p class="text-sm text-slate-500 mt-0.5">CloudNine Systems · Remote</p>
+              </div>
+              <button class="text-rose-500 shrink-0" title="Saved">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+              </button>
+            </div>
+            <p class="text-sm text-slate-600 mt-2 line-clamp-2">Operate and evolve our multi-region Kubernetes platform. Strong Terraform and AWS experience required.</p>
+            <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">IT</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">Full-time</span>
+              <span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-medium">CDI</span>
+              <span class="text-slate-400">·</span>
+              <span class="font-semibold text-slate-900">$135,000</span>
+              <span class="text-slate-400">·</span>
+              <span class="text-slate-500">Posted 5 days ago</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="block bg-white border border-slate-200 rounded-2xl p-5 hover:border-brand-300 hover:shadow-sm transition">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-violet-100 text-violet-700 grid place-items-center font-bold shrink-0">CN</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="font-semibold text-slate-900">Machine Learning Engineer</h3>
+                <p class="text-sm text-slate-500 mt-0.5">CloudNine Systems · San Francisco, CA</p>
+              </div>
+              <button class="text-slate-400 hover:text-rose-500 shrink-0" title="Save">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+              </button>
+            </div>
+            <p class="text-sm text-slate-600 mt-2 line-clamp-2">Train, evaluate, and deploy ML models for personalization and forecasting use cases at scale.</p>
+            <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">IT</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">Full-time</span>
+              <span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-medium">CDI</span>
+              <span class="text-slate-400">·</span>
+              <span class="font-semibold text-slate-900">$145,000</span>
+              <span class="text-slate-400">·</span>
+              <span class="text-slate-500">Posted 1 week ago</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="block bg-white border border-slate-200 rounded-2xl p-5 hover:border-brand-300 hover:shadow-sm transition">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 grid place-items-center font-bold shrink-0">GF</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="font-semibold text-slate-900">Site Reliability Engineer</h3>
+                <p class="text-sm text-slate-500 mt-0.5">GreenField Logistics · Long Beach, CA</p>
+              </div>
+              <button class="text-slate-400 hover:text-rose-500 shrink-0" title="Save">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+              </button>
+            </div>
+            <p class="text-sm text-slate-600 mt-2 line-clamp-2">Keep our production stack reliable, observable, and on-call ready. Strong incident response background required.</p>
+            <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">IT</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">Full-time</span>
+              <span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-medium">CDI</span>
+              <span class="text-slate-400">·</span>
+              <span class="font-semibold text-slate-900">$130,000</span>
+              <span class="text-slate-400">·</span>
+              <span class="text-slate-500">Posted 1 week ago</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="block bg-white border border-slate-200 rounded-2xl p-5 hover:border-brand-300 hover:shadow-sm transition">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-700 grid place-items-center font-bold shrink-0">BM</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="font-semibold text-slate-900">Frontend Engineer (React)</h3>
+                <p class="text-sm text-slate-500 mt-0.5">BrightMedia Agency · Remote</p>
+              </div>
+              <button class="text-slate-400 hover:text-rose-500 shrink-0" title="Save">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+              </button>
+            </div>
+            <p class="text-sm text-slate-600 mt-2 line-clamp-2">Build accessible, performant user interfaces in React and TypeScript. Strong design-system experience preferred.</p>
+            <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">IT</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">Remote</span>
+              <span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-medium">CDI</span>
+              <span class="text-slate-400">·</span>
+              <span class="font-semibold text-slate-900">$98,000</span>
+              <span class="text-slate-400">·</span>
+              <span class="text-slate-500">Posted 2 days ago</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a href="job-detail.html" class="block bg-white border border-slate-200 rounded-2xl p-5 hover:border-brand-300 hover:shadow-sm transition">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-fuchsia-100 text-fuchsia-700 grid place-items-center font-bold shrink-0">AN</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="font-semibold text-slate-900">Avionics Systems Engineer</h3>
+                <p class="text-sm text-slate-500 mt-0.5">AeroNova Aerospace · Huntsville, AL</p>
+              </div>
+              <button class="text-slate-400 hover:text-rose-500 shrink-0" title="Save">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+              </button>
+            </div>
+            <p class="text-sm text-slate-600 mt-2 line-clamp-2">Design and validate embedded avionics for our next-generation satellite platform. Do-178C experience a plus.</p>
+            <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
+              <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">Engineering</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">Full-time</span>
+              <span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-medium">CDI</span>
+              <span class="text-slate-400">·</span>
+              <span class="font-semibold text-slate-900">$132,000</span>
+              <span class="text-slate-400">·</span>
+              <span class="text-slate-500">Posted 4 days ago</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-8 flex items-center justify-center gap-2 text-sm">
+      <button class="px-3 py-2 rounded-lg border border-slate-200 bg-white text-slate-500 hover:text-slate-700">← Previous</button>
+      <button class="px-3 py-2 rounded-lg bg-brand-600 text-white font-semibold">1</button>
+      <button class="px-3 py-2 rounded-lg border border-slate-200 bg-white text-slate-700 hover:text-brand-700">2</button>
+      <button class="px-3 py-2 rounded-lg border border-slate-200 bg-white text-slate-700 hover:text-brand-700">3</button>
+      <span class="px-2 text-slate-400">…</span>
+      <button class="px-3 py-2 rounded-lg border border-slate-200 bg-white text-slate-700 hover:text-brand-700">42</button>
+      <button class="px-3 py-2 rounded-lg border border-slate-200 bg-white text-slate-500 hover:text-slate-700">Next →</button>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-slate-200 bg-white mt-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-xs text-slate-500 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+    <span>© 2026 JobBoard demo · Static preview</span>
+    <a href="index.html" class="hover:text-slate-700">← Back to home</a>
+  </div>
+</footer>
+</body>
+</html>

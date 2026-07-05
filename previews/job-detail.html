@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Senior Full-Stack Engineer — CloudNine Systems — JobBoard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+<style>body{font-family:'Inter',system-ui,sans-serif}</style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+<!-- Header -->
+<header class="border-b border-slate-200 bg-white sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-lg bg-brand-600 text-white grid place-items-center font-bold">JB</div>
+      <span class="font-bold text-slate-900 text-lg">JobBoard</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+      <a href="index.html" class="hover:text-slate-900">Home</a>
+      <a href="jobs.html" class="text-brand-700">Browse Jobs</a>
+      <a href="dashboard-employer.html" class="hover:text-slate-900">For Employers</a>
+      <a href="dashboard-jobseeker.html" class="hover:text-slate-900">For Job Seekers</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="login.html" class="text-sm font-medium text-slate-700 hover:text-slate-900">Sign in</a>
+      <a href="register.html" class="text-sm font-medium bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-700">Get started</a>
+    </div>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+  <nav class="text-sm text-slate-500">
+    <a href="index.html" class="hover:text-slate-700">Home</a>
+    <span class="mx-1">/</span>
+    <a href="jobs.html" class="hover:text-slate-700">Jobs</a>
+    <span class="mx-1">/</span>
+    <span class="text-slate-700">Senior Full-Stack Engineer</span>
+  </nav>
+</div>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+  <!-- Main content -->
+  <article class="lg:col-span-8 space-y-6">
+    <!-- Title block -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6">
+      <div class="flex items-start gap-4">
+        <div class="w-14 h-14 rounded-xl bg-indigo-100 text-indigo-700 grid place-items-center font-bold text-lg shrink-0">CN</div>
+        <div class="flex-1 min-w-0">
+          <h1 class="text-2xl font-bold text-slate-900">Senior Full-Stack Engineer</h1>
+          <p class="text-slate-600 mt-1">CloudNine Systems</p>
+          <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
+            <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">IT</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-medium">Full-time</span>
+            <span class="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-medium">CDI</span>
+            <span class="text-slate-400">·</span>
+            <span class="font-semibold text-slate-900">$125,000 / year</span>
+          </div>
+          <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-600">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Seattle, WA · Remote-friendly
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Posted 3 days ago
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Apply by Aug 30
+            </span>
+          </div>
+        </div>
+        <button class="hidden sm:flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-rose-600 px-3 py-2 rounded-lg hover:bg-rose-50">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+          Save
+        </button>
+      </div>
+
+      <div class="mt-6 flex flex-col sm:flex-row gap-3">
+        <a href="login.html" class="flex-1 text-center bg-brand-600 text-white px-5 py-3 rounded-xl font-semibold hover:bg-brand-700">Apply now</a>
+        <button class="px-5 py-3 rounded-xl font-semibold border border-slate-200 hover:bg-slate-50">Share</button>
+      </div>
+    </section>
+
+    <!-- Description -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6">
+      <h2 class="text-lg font-semibold text-slate-900">About the role</h2>
+      <div class="prose prose-sm prose-slate max-w-none mt-3 text-slate-600 space-y-3">
+        <p>Design, build, and operate production services end-to-end. You will own architecture decisions, mentor mid-level engineers, and partner with product on roadmap.</p>
+        <p>CloudNine Systems is a cloud-native infrastructure platform serving Fortune 500 customers. We move fast, ship often, and care deeply about reliability and developer experience.</p>
+        <h3 class="text-base font-semibold text-slate-900 pt-2">Responsibilities</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Design and implement scalable services in Go, Node, or Python</li>
+          <li>Own services in production, including on-call and incident response</li>
+          <li>Mentor engineers and review designs for quality and consistency</li>
+          <li>Collaborate with product managers on roadmap and prioritization</li>
+        </ul>
+        <h3 class="text-base font-semibold text-slate-900 pt-2">Requirements</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>5+ years building production systems at scale</li>
+          <li>Strong fundamentals in distributed systems, data modeling, and APIs</li>
+          <li>Experience with cloud platforms (AWS, GCP, or Azure) and containers</li>
+          <li>Excellent written and verbal communication skills</li>
+        </ul>
+        <h3 class="text-base font-semibold text-slate-900 pt-2">Nice to have</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Open-source contributions</li>
+          <li>Experience with Kubernetes, Terraform, and observability tooling</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6">
+      <h2 class="text-lg font-semibold text-slate-900">Required skills</h2>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm">Go</span>
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm">TypeScript</span>
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm">PostgreSQL</span>
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm">Kubernetes</span>
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm">AWS</span>
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm">Terraform</span>
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm">gRPC</span>
+        <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-sm">Distributed Systems</span>
+      </div>
+    </section>
+  </article>
+
+  <!-- Sidebar -->
+  <aside class="lg:col-span-4 space-y-6">
+    <!-- Company card -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 grid place-items-center font-bold">CN</div>
+        <div>
+          <div class="font-semibold text-slate-900">CloudNine Systems</div>
+          <div class="text-xs text-slate-500">Technology · Seattle, WA</div>
+        </div>
+      </div>
+      <p class="mt-4 text-sm text-slate-600">Cloud-native infrastructure platform serving Fortune 500 customers. We build reliable, observable systems at scale.</p>
+      <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+        <div class="bg-slate-50 rounded-lg p-3">
+          <div class="font-semibold text-slate-900">12</div>
+          <div class="text-xs text-slate-500">Open jobs</div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-3">
+          <div class="font-semibold text-slate-900">240+</div>
+          <div class="text-xs text-slate-500">Employees</div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-3">
+          <div class="font-semibold text-slate-900">4.5</div>
+          <div class="text-xs text-slate-500">Glassdoor</div>
+        </div>
+      </div>
+      <a href="#" class="mt-4 block text-center text-sm font-semibold text-brand-700 hover:text-brand-800">View company profile →</a>
+    </section>
+
+    <!-- Apply panel -->
+    <section class="bg-brand-600 text-white rounded-2xl p-6">
+      <h3 class="font-semibold text-lg">Ready to apply?</h3>
+      <p class="text-sm text-brand-100 mt-1">It takes about 2 minutes. We'll save your progress.</p>
+      <a href="login.html" class="mt-4 block text-center bg-white text-brand-700 px-5 py-3 rounded-xl font-semibold hover:bg-brand-50">Sign in to apply</a>
+      <p class="mt-3 text-xs text-brand-100 text-center">Don't have an account? <a href="register.html" class="underline">Create one</a>.</p>
+    </section>
+
+    <!-- Similar jobs -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6">
+      <h3 class="font-semibold text-slate-900">Similar jobs</h3>
+      <div class="mt-4 space-y-4">
+        <a href="job-detail.html" class="block group">
+          <div class="text-sm font-semibold text-slate-900 group-hover:text-brand-700">Cloud Infrastructure Engineer</div>
+          <div class="text-xs text-slate-500 mt-0.5">CloudNine Systems · Remote · $135k</div>
+        </a>
+        <a href="job-detail.html" class="block group">
+          <div class="text-sm font-semibold text-slate-900 group-hover:text-brand-700">Machine Learning Engineer</div>
+          <div class="text-xs text-slate-500 mt-0.5">CloudNine Systems · San Francisco · $145k</div>
+        </a>
+        <a href="job-detail.html" class="block group">
+          <div class="text-sm font-semibold text-slate-900 group-hover:text-brand-700">Site Reliability Engineer</div>
+          <div class="text-xs text-slate-500 mt-0.5">GreenField Logistics · Long Beach · $130k</div>
+        </a>
+        <a href="job-detail.html" class="block group">
+          <div class="text-sm font-semibold text-slate-900 group-hover:text-brand-700">Backend Engineer (Go)</div>
+          <div class="text-xs text-slate-500 mt-0.5">CloudNine Systems · Seattle · $118k</div>
+        </a>
+      </div>
+    </section>
+  </aside>
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-slate-200 bg-white mt-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-xs text-slate-500 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+    <span>© 2026 JobBoard demo · Static preview</span>
+    <a href="jobs.html" class="hover:text-slate-700">← Back to jobs</a>
+  </div>
+</footer>
+</body>
+</html>

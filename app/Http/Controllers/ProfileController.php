@@ -24,6 +24,10 @@ public function edit(Request $request): View
     // Ensure that a relationship has been defined in the User model
     $jobSeekerProfile = $user->profile;
 
+    if (!$jobSeekerProfile) {
+        return redirect()->route('jobseeker.profile.create')->with('error', 'Please create your profile first.');
+    }
+
     // Return the edit view for the profile, passing the user and their profile data
     return view('profile.edit', [
         'user' => $user,
@@ -60,8 +64,10 @@ public function update(ProfileUpdateRequest $request)
         'contact_information',
     ]);
 
-    // Update the job seeker profile with the new data
-    $user->profile->update($profileData);
+    // Update the job seeker profile with the new data if it exists
+    if ($user->profile) {
+        $user->profile->update($profileData);
+    }
 
     // Redirect to the profile edit page with a success message
     return Redirect::route('profile.edit')->with('success', 'profile-updated');
