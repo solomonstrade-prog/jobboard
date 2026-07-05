@@ -29,4 +29,23 @@ class JobseekerApplicationController extends Controller
 
         return view("Jobseeker.showapplication",compact("application"));
     }
+
+    public function destroy($id)
+    {
+        $profile = auth()->user()->profile;
+
+        if (! $profile) {
+            return redirect()->route('jobseeker.profile.create')
+                ->with('error', 'Please create your profile first.');
+        }
+
+        $application = Application::where('id', $id)
+            ->where('id_jobseeker', $profile->id)
+            ->firstOrFail();
+
+        $application->delete();
+
+        return redirect()->route('jobseeker.applications.index')
+            ->with('success', 'Application withdrawn successfully.');
+    }
 }

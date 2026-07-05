@@ -85,8 +85,12 @@ Route::middleware(['auth','role:admin'])->group(function () {
         Route::get('/search', [AdminApplicationController::class, 'search'])->name('applications.search');
         Route::get('/{id}', [AdminApplicationController::class, 'show'])->name('applications.show');
         Route::delete('/{id}', [AdminApplicationController::class, 'destroy'])->name('applications.destroy');
-        Route::put('/application/{application}/status', [AdminApplicationController::class, 'updateStatus'])->name('updateStatus');
     });
+
+    // Update application status (admin). Kept at top-level singular URL —
+    // the Breeze /admin tests expect PUT /application/{id}/status.
+    Route::put('/application/{application}/status', [AdminApplicationController::class, 'updateStatus'])
+        ->name('updateStatus');
 
     //logout Employer dashboard
     Route::get('/admin/logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
